@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Line Prettier</title>
+
+<style>
+*{
+	padding:0;
+	margin:0;
+}
+
+textarea {
+	resize: none;
+	width: 100%;
+	height: 200px;
+}
+
+
+#button_group {
+	width: 100%;
+	text-align:right;
+}
+
+textarea{
+	user-select: none;
+}
+
+</style>
+
+<script>
+// et al. 또는 Fig. 3 or U.S. 쓸 때 없는 개행
+function line_prittier(){
+	let input=document.getElementById("input").value;
+	newline_remove_result=input.replace(/\n/g, " ");
+	line_per_dot=newline_remove_result.replace(/\.\s/g, ".\n\n");
+	document.getElementById("output").value=line_per_dot;
+	
+}
+
+function reset(){
+	document.getElementById("input").value="";
+	document.getElementById("output").value="";
+}
+
+function output_copy(){
+	document.getElementById("output").select();
+	document.execCommand('copy');
+	window.getSelection().removeAllRanges();
+}
+
+</script>
+<body>
+
+<div>
+<textarea id="input"></textarea>
+</div>
+
+<div id="button_group">
+<input type="button" value="Convert!" id="Convert" class="button" onclick="javascript:line_prittier()" />
+<input type="button" value="Reset" id="Reset" class="button" onclick="javascript:reset()"/>
+</div>
+
+<div>
+<textarea draggable="false" id="output" readonly onclick="javascript:output_copy()"></textarea>
+</div>
+
+</body>
+</html>
